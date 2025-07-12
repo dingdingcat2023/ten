@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>十消乐 - 10x10消消乐小游戏</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>十消乐</h1>
+      <div class="score-board">
+        <span id="score">分数: 0</span>
+        <button id="restart">重开</button>
+      </div>
+      <div id="time-remaining" style="font-size:1.1rem;color:#f59e42;margin-bottom:4px;"></div>
+    </header>
+    <div class="board-wrapper">
+      <div id="game-board" class="game-board"></div>
+    </div>
+    <div class="leaderboard">
+      <h2>排行榜</h2>
+      <ol id="leaderboard-list"></ol>
+      <button id="clear-leaderboard" style="margin:12px auto 0 auto;display:block;">清空排行榜</button>
+    </div>
+    <div id="settings-panel" class="settings-panel">
+      <h2>选择挑战难度</h2>
+      <div class="setting-group">
+        <label>数字难度：</label>
+        <label><input type="radio" name="num-mode" value="single" checked> 个位数（1~9）</label>
+        <label><input type="radio" name="num-mode" value="double"> 十位数（1~99）</label>
+      </div>
+      <div class="setting-group">
+        <label>棋盘大小：</label>
+        <label><input type="radio" name="board-size" value="4"> 4x4</label>
+        <label><input type="radio" name="board-size" value="6"> 6x6</label>
+        <label><input type="radio" name="board-size" value="10" checked> 10x10</label>
+      </div>
+      <div class="setting-group">
+        <label>倒计时：</label>
+        <label><input type="radio" name="timer" value="60" checked> 1分钟</label>
+        <label><input type="radio" name="timer" value="120"> 2分钟</label>
+      </div>
+      <button id="start-game">开始游戏</button>
+    </div>
+    <div id="name-modal" class="name-modal" style="display:none;">
+      <div class="name-modal-content">
+        <h3>恭喜进入排行榜！</h3>
+        <label for="player-name">请输入你的名字：</label>
+        <input id="player-name" maxlength="12" placeholder="匿名" autocomplete="off" />
+        <button id="submit-name">确认</button>
+      </div>
+    </div>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html> 
