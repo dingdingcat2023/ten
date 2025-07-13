@@ -55,7 +55,7 @@ const defaultSettings = {
 
 const Home: React.FC = () => {
   // 设置项可从localStorage读取
-  const [settings, setSettings] = useState(() => {
+  const [settings] = useState(() => {
     const s = localStorage.getItem('ten_settings');
     return s ? JSON.parse(s) : defaultSettings;
   });
@@ -72,14 +72,15 @@ const Home: React.FC = () => {
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(settings.timer);
   const [gameOver, setGameOver] = useState(false);
-  const [timerId, setTimerId] = useState<NodeJS.Timeout | null>(null);
+  // NodeJS.Timeout 改为 setInterval 返回值类型
+  const [timerId, setTimerId] = useState<ReturnType<typeof setInterval> | null>(null);
 
   // 启动倒计时
   useEffect(() => {
     if (gameOver) return;
     if (timerId) clearInterval(timerId);
     const id = setInterval(() => {
-      setTimeLeft(t => {
+      setTimeLeft((t: number) => {
         if (t <= 1) {
           clearInterval(id);
           setGameOver(true);
@@ -237,7 +238,7 @@ const Home: React.FC = () => {
           alignItems: 'center',
           width: '100%',
         }}>
-          <img src={logo} alt="叮咚-十消乐" style={{ height: 36, marginBottom: 2, borderRadius: 8, boxShadow: '0 2px 8px #ffe082' }} />
+          <img src={logo} alt="TEN" style={{ height: 36, marginBottom: 2, borderRadius: 8, boxShadow: '0 2px 8px #ffe082' }} />
           <span style={{
             fontSize: 28,
             fontWeight: 'bold',
@@ -253,12 +254,16 @@ const Home: React.FC = () => {
         <GameBoard board={board} selected={selected} onCellClick={handleCellClick} />
         {/* 分数与倒计时美化 */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '16px 0', fontFamily: 'ZCOOL KuaiLe', fontSize: 24 }}>
-          <span style={{ display: 'flex', alignItems: 'center', color: '#ffb347', gap: 8 }}><FaTrophy style={{ color: '#ffd700', fontSize: 28 }} /> 分数：{score}</span>
-          <span style={{ display: 'flex', alignItems: 'center', color: '#1677ff', gap: 8 }}><FaClock style={{ color: '#1677ff', fontSize: 24 }} /> {timeLeft}s</span>
+          <span style={{ display: 'flex', alignItems: 'center', color: '#ffb347', gap: 8 }}><FaTrophy color="#ffd700" size={28} /> 分数：{score}</span>
+          <span style={{ display: 'flex', alignItems: 'center', color: '#1677ff', gap: 8 }}><FaClock color="#1677ff" size={24} /> {timeLeft}s</span>
         </div>
         {/* 排行榜入口 */}
-        <Button color="primary" block href="/leaderboard" style={{ fontFamily: 'ZCOOL KuaiLe', fontSize: 20, borderRadius: 16, marginBottom: 12, background: 'linear-gradient(90deg,#ffb347,#f9f871)' }}>🏆 查看排行榜</Button>
-        <Button block style={{ fontFamily: 'ZCOOL KuaiLe', fontSize: 20, borderRadius: 16, background: 'linear-gradient(90deg,#aee1f9,#1677ff)', color: '#fff', marginBottom: 12 }} onClick={restartGame}><FaRedo style={{ marginRight: 8 }} />重开一局</Button>
+        <a href="/leaderboard" style={{ textDecoration: 'none' }}>
+          <Button color="primary" block style={{ fontFamily: 'ZCOOL KuaiLe', fontSize: 20, borderRadius: 16, marginBottom: 12, background: 'linear-gradient(90deg,#ffb347,#f9f871)' }}>🏆 查看排行榜</Button>
+        </a>
+        <Button block style={{ fontFamily: 'ZCOOL KuaiLe', fontSize: 20, borderRadius: 16, background: 'linear-gradient(90deg,#aee1f9,#1677ff)', color: '#fff', marginBottom: 12 }} onClick={restartGame}>
+          <span style={{ display: 'inline-block', marginRight: 8 }}><FaRedo size={20} /></span>重开一局
+        </Button>
         <Button block style={{ fontFamily: 'ZCOOL KuaiLe', fontSize: 20, borderRadius: 16, background: 'linear-gradient(90deg,#fffbe6,#ffe082)', color: '#2d3a4b' }} onClick={gotoSettings}>设置</Button>
       </div>
     </div>
