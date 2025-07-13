@@ -1,0 +1,13 @@
+<svg width="100" height="40" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <text x="5" y="32" font-family="'ZCOOL KuaiLe', 'Baloo 2', cursive" font-size="32" font-weight="bold"
+    fill="#1677ff" stroke="#22223b" stroke-width="2" filter="url(#shadow)">T</text>
+  <text x="35" y="32" font-family="'ZCOOL KuaiLe', 'Baloo 2', cursive" font-size="32" font-weight="bold"
+    fill="#ffb347" stroke="#22223b" stroke-width="2" filter="url(#shadow)">E</text>
+  <text x="65" y="32" font-family="'ZCOOL KuaiLe', 'Baloo 2', cursive" font-size="32" font-weight="bold"
+    fill="#4caf50" stroke="#22223b" stroke-width="2" filter="url(#shadow)">N</text>
+  <defs>
+    <filter id="shadow" x="0" y="0" width="200%" height="200%">
+      <feDropShadow dx="1" dy="2" stdDeviation="1" flood-color="#22223b" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+</svg> 
